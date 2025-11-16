@@ -2806,6 +2806,20 @@ public class SubsamplingScaleImageView extends View {
         }
     }
 
+    private int tileCacheLimit = 32;
+
+    public void setTileCacheSize(int size) {
+        tileCacheLimit = Math.max(8, size);
+    }
+
+    public void refreshTiles() {
+        try {
+            refreshRequiredTiles(true);
+        } catch (Throwable t) {
+            invalidate();
+        }
+    }
+
     /**
      * Async task used to load images without blocking the UI thread.
      */
